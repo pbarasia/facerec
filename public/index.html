@@ -1,0 +1,26 @@
+<html>
+<head>
+  <title>Face app</title>
+  <script src="./js/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <link href="./css/app.css" rel="stylesheet">
+  
+</head>
+<body>
+    <div id="app">
+        {{ message }}
+        <input type="file" name="myFile" ref="file" v-on:change="handleFileUpload()"/>
+        <div class="image-container">
+          <img :src="'data:image/jpeg;base64,' + faces.target" ref='sourceImg'/>
+        </div>
+        <!-- <div class="image-container">
+          <div class="bounding-box" v-bind:style="bStyle"></div>
+          <img :src="'data:image/jpeg;base64,' + faces.target" ref='targetImg'/>
+        </div>  -->
+        <div v-for="face in faces.faces">
+          <img :src="'data:image/jpeg;base64,' + face"/>
+        </div>
+    </div>
+      <script src="./js/app.js" type="module"></script>
+</body>
+</html>
