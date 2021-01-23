@@ -1,6 +1,6 @@
 const axios = require('axios');
 const utils = require('./utils');
-const conf=require('./config').chatApiConfig;
+const conf=require('../config').chatApiConfig;
 
 module.exports.sendTextMessage = function(chatId,message){
 

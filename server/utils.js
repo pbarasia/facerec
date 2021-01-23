@@ -3,7 +3,7 @@ const fs = require('fs');
 const sharp=require('sharp');
 const https=require('https')
 const { v4: uuidv4 } = require('uuid');
-const conf=require('./config')
+const conf=require('../config')
 
 AWS.config.update(conf.awsConfig);
 
@@ -40,6 +40,7 @@ module.exports.searchFaces = function(sourceImage){
 
 module.exports.getFaces = async function(sourceImage,doIndex=true){
 
+  debugger;
   let cutFaces=[],faceMatches=[],allFaces=[];
 
   function sanitizeCoordinates(coordinate){
@@ -64,6 +65,13 @@ module.exports.getFaces = async function(sourceImage,doIndex=true){
           height:parseInt(sanitizeCoordinates(face.Height) * tmpimg.height) ,
           width:parseInt(sanitizeCoordinates(face.Width) * tmpimg.width),
       }
+      allFaces.push({
+        top:(sanitizeCoordinates(face.Top)),
+        left:(sanitizeCoordinates(face.Left)) , 
+        height:(sanitizeCoordinates(face.Height)) ,
+        width:(sanitizeCoordinates(face.Width)),
+
+      });
       let img=await sharp(sourceImage).rotate().extract(bb).toFile(fileName)
       let sr=await this.searchFaces(fileName)
       if(sr.FaceMatches.length)
@@ -73,7 +81,6 @@ module.exports.getFaces = async function(sourceImage,doIndex=true){
             // console.log(element)
             cutFaces.push(this.getBase64String('./userImages/'+element.Face.ExternalImageId+'.jpg'))
             faceMatches.push(element.Face.ExternalImageId)
-            allFaces.push(element.Face.ExternalImageId)
           }
         }
       else
@@ -85,7 +92,6 @@ module.exports.getFaces = async function(sourceImage,doIndex=true){
               let username='user'+uuidv4();
               this.indexFaces(fileName,username);
               fs.renameSync(fileName,'./userImages/'+username+'.jpg')
-              allFaces.push(username)
             }
         }  
       

@@ -3,34 +3,33 @@ new Vue({
   data () {
     return {
       faces: {},
-      message:'test',
-      file:''
+      file:'',
+      imgLoaded:false
     }
-  },
-  computed: {
-    // bStyle: function () {
-    //   if(!this.faces.boundingBox || !this.mounted)
-    //     return {}
-        
-    //   let image=this.$refs.targetImg;
-    //   if(!image)
-    //     return {}
-    //   let bb=this.faces.boundingBox.SearchedFaceBoundingBox;
-    //   return {
-    //     top:bb.Top * 1000 +'px',
-    //     left:bb.Left * image.width +'px', 
-    //     height:bb.Height * 1000 +'px',
-    //     width:bb.Width * image.width +'px',
-
-    //   }
-  
-    // }
   },
   mounted () {
     this.mounted=true;
     
   },
   methods:{
+    onImgLoad(){
+      this.imgLoaded=true;
+    },
+    bbStyle: function (bb) {
+      if(!bb|| !this.mounted || !this.imgLoaded)
+        return {}
+        
+      let image=this.$refs.targetImg;
+      if(!image)
+        return {}
+      return {
+        top:bb.top * image.height +'px',
+        left:bb.left * image.width +'px', 
+        height:bb.height * image.height +'px',
+        width:bb.width * image.width +'px',
+      }
+  
+    },
     handleFileUpload(){
       let self=this
      this.file = this.$refs.file.files[0];

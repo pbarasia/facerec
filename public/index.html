@@ -8,18 +8,20 @@
 </head>
 <body>
     <div id="app">
-        {{ message }}
+        <h1>Upload file to find faces</h1>
         <input type="file" name="myFile" ref="file" v-on:change="handleFileUpload()"/>
-        <div class="image-container">
-          <img :src="'data:image/jpeg;base64,' + faces.target" ref='sourceImg'/>
-        </div>
         <!-- <div class="image-container">
-          <div class="bounding-box" v-bind:style="bStyle"></div>
-          <img :src="'data:image/jpeg;base64,' + faces.target" ref='targetImg'/>
-        </div>  -->
-        <div v-for="face in faces.faces">
+          <img :src="'data:image/jpeg;base64,' + faces.target" ref='sourceImg'/>
+        </div> -->
+        <div class="image-container">
+          <img :src="'data:image/jpeg;base64,' + faces.target" ref='targetImg' @load="onImgLoad"/>
+          <template v-if="imgLoaded">  
+            <div v-for="bb in faces.allFaces" v-bind:style="bbStyle(bb)" class="bounding-box"></div>
+        </template> 
+        </div> 
+        <!-- <div v-for="face in faces.faces">
           <img :src="'data:image/jpeg;base64,' + face"/>
-        </div>
+        </div> -->
     </div>
       <script src="./js/app.js" type="module"></script>
 </body>

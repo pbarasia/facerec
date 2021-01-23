@@ -47,7 +47,8 @@ router.get('/showFaces',function(req,res){
       var response={
           target:utils.getBase64String(target),
           faces: data.cutFaces,
-          matches:data.matches
+          matches:data.matches,
+          allFaces:data.allFaces
       }
       res.json(response)
   })
