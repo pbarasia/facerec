@@ -6,20 +6,7 @@
 </head>
 <body>
     <div id="app">
-        <h1>Upload file to find faces</h1>
-        <file-uploader></file-uploader>
-        <!-- <div class="image-container">
-          <img :src="'data:image/jpeg;base64,' + faces.target" ref='sourceImg'/>
-        </div> -->
-        <div class="image-container">
-          <img :src="'data:image/jpeg;base64,' + faces.target" ref='targetImg' @load="onImgLoad"/>
-          <template v-if="imgLoaded">  
-            <div v-for="bb in faces.allFaces" v-bind:style="bbStyle(bb)" class="bounding-box"></div>
-        </template> 
-        </div> 
-        <!-- <div v-for="face in faces.faces">
-          <img :src="'data:image/jpeg;base64,' + face"/>
-        </div> -->
+        
     </div>
 </body>
 </html>
