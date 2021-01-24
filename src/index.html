@@ -1,15 +1,13 @@
 <html>
 <head>
   <title>Face app</title>
-  <script src="./js/vue.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <link href="./css/app.css" rel="stylesheet">
   
 </head>
 <body>
     <div id="app">
         <h1>Upload file to find faces</h1>
-        <input type="file" name="myFile" ref="file" v-on:change="handleFileUpload()"/>
+        <file-uploader></file-uploader>
         <!-- <div class="image-container">
           <img :src="'data:image/jpeg;base64,' + faces.target" ref='sourceImg'/>
         </div> -->
@@ -23,6 +21,5 @@
           <img :src="'data:image/jpeg;base64,' + face"/>
         </div> -->
     </div>
-      <script src="./js/app.js" type="module"></script>
 </body>
 </html>

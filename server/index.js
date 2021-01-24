@@ -11,12 +11,12 @@ const https=require('https')
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 
-app.use(express.static('public'))
+app.use(express.static('dist'))
 app.use("/img", express.static(__dirname + "/uploads"));
 app.use(bodyParser.json())
 
 router.get('/',function(req,res){
-  res.sendFile(path.join(__dirname+'/public/index.html'));
+  res.sendFile(path.join(__dirname+'/dist/index.html'));
 });
 
 var storage = multer.diskStorage({
