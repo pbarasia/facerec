@@ -3,12 +3,15 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
     name:"FileUploader",
     data(){
         return {}
     },
     methods:{
+        ...mapMutations(['setFacesData']),
         handleFileUpload(){
             let self=this
             this.file = this.$refs.file.files[0];
@@ -27,6 +30,7 @@ export default {
             .get('/showFaces?targetImage='+data.data.filename)
             .then(function(response){
                 self.faces = response.data
+                self.setFacesData(response.data)
             })
             })
             .catch(function(){

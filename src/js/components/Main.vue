@@ -15,18 +15,22 @@
 </template>
 <script>
 import FileUploader from './FileUploader'
+import {mapState} from 'vuex'
+
 export default {
     name:'Main',
     components:{FileUploader},
     data () {
         return {
-        faces: {},
         file:'',
         imgLoaded:false
         }
     },
     mounted () {
         this.mounted=true;
+    },
+    computed:{
+        ...mapState(["faces"])
     },
     methods:{
         onImgLoad(){
@@ -51,3 +55,7 @@ export default {
   }
 }
 </script>
+
+<style>
+@import '../../css/app.css';
+</style>
